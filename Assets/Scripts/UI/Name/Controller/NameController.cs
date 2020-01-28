@@ -1,10 +1,13 @@
-﻿using Assets.Scripts.UI.Name.Model;
+﻿using System;
+using Assets.Scripts.UI.Name.Model;
 using Assets.Scripts.UI.Name.View;
 
 namespace Assets.Scripts.UI.Name.Controller
 {
     public class NameController : INameController
     {
+        public event Action ActivateInput;
+
         private INameData _model;
         private INameView _view;
 
@@ -13,7 +16,17 @@ namespace Assets.Scripts.UI.Name.Controller
             _model = model;
             _view = view;
             _view.SetName(_model);
-        }      
+
+            _view.ActivateInput += OnActivateInput;
+        }
+
+        private void OnActivateInput()
+        {
+            if (ActivateInput != null)
+            {
+                ActivateInput.Invoke();
+            }
+        }
 
         public void SetName(string name)
         {

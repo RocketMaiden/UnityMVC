@@ -4,6 +4,8 @@ namespace Assets.Scripts.UI.InputName.View
 {
     public interface IInputNameView
     {
-        event Action<string> TextInput;                      
+        event Action<string> TextInput;
+        void Show();
+        void Hide();
     }
 }

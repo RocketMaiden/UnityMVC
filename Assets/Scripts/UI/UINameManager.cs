@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.UI.InputName.Controller;
+﻿using System;
+using Assets.Scripts.UI.InputName.Controller;
 using Assets.Scripts.UI.InputName.Model;
 using Assets.Scripts.UI.InputName.View;
 using Assets.Scripts.UI.Name.Controller;
@@ -23,11 +24,23 @@ namespace Assets.Scripts.UI
             _nameController = new NameController();
             _nameController.Initialize(new NameData(), _nameView);
             _nameController.SetName("user");
+            _nameController.ActivateInput += OnActivateInput;
 
             _inputNameController = new InputNameController();
             _inputNameController.Initialize(new InputNameData(), _inputNameView);
             _inputNameController.TextInput += OnTextInput;
-        }       
+
+        }
+        private void OnDestroy()
+        {
+            _nameController.ActivateInput -= OnActivateInput;
+            _inputNameController.TextInput -= OnTextInput;
+        }
+
+        private void OnActivateInput()
+        {
+            _inputNameController.Activate();
+        }
 
         private void OnTextInput(IInputNameDataReadOnly model)
         {

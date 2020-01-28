@@ -31,8 +31,12 @@ namespace Assets.Scripts.UI.InputName.Controller
             {
                 TextInput.Invoke(_model);
             }
+            _view.Hide();
         }
 
-        
+        public void Activate()
+        {
+            _view.Show();
+        }
     }
 }

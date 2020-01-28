@@ -7,6 +7,7 @@ namespace Assets.Scripts.UI.InputName.Controller
     public interface IInputNameController
     {
         event Action<IInputNameDataReadOnly> TextInput;
-        void Initialize(IInputNameData model, IInputNameView view);        
+        void Initialize(IInputNameData model, IInputNameView view);
+        void Activate();
     }
 }
